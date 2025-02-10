@@ -43,7 +43,7 @@ function findUser(req, res) {
         res.json({
             message:"Invalid credentials"
         })
-    } else {
+    } else { 
         let token = jwt.sign({username}, JWT_SECRET)
         res.header("random", "Gopal")   
 

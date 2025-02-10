@@ -7,7 +7,7 @@
 </head>
 <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 <script>
-     async function signUp() {
+    async function signUp() {
         const username = document.getElementById("signupUsername").value
         const password = document.getElementById("signupPassword").value
 
@@ -16,6 +16,17 @@
             password: password
         })
         alert("You are signed Up")
+    }
+
+    async function signIn() {
+        const username = document.getElementById("signInUsername").value
+        const password = document.getElementById("signInPassword").value
+
+        await axios.post("http://localhost:3000/signin", {
+            username: username,
+            password: password
+        })
+        alert("You are signed In")
     }
 </script>
 <body>
@@ -27,8 +38,8 @@
     </div>
     <div>
         Sign In
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password">
+        <input id="signInUsername" type="text" name="username" placeholder="username">
+        <input id="signInPassword" type="password" name="password" placeholder="password">
         <button onclick="signIn()">Submit</button>
     </div>
     <div>
