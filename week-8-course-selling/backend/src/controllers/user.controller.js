@@ -4,6 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 //! import models
 import { UserModel } from "../models/user.model.js";
 import { PurchaseModel } from "../models/purchase.model.js";
+import { CourseModel } from "../models/course.model.js";
 
 //.access and refresh token
 const generateAccessAndRefreshToken = async (userId) => {
@@ -86,7 +87,9 @@ const signIn = asyncHandler(async (req, res) => {
   }
 
   //!tokens
-  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id);
+  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
+    user._id
+  );
 
   const loggedInUser = await UserModel.findById(user._id).select(
     "-password -refreshToken"
@@ -143,18 +146,22 @@ const logOut = asyncHandler(async (req, res) => {
 
 //.Purchases
 const purchases = async (req, res) => {
-  //#already purchased
-  const user = req.user;
+  const userId = req.user._id;
+  const purchases = await PurchaseModel.find({
+    userId,
+  }).populate("courseId")
 
-  const purchases = await PurchaseModel.findById(user._id);
-  if (!purchases) {
-    throw new ApiError(401, "No any course purchased by the user");
+  if (purchases.length == 0) {
+    throw new ApiError(400, "You havent bought any course yet");
   }
 
-  let purchasedCourseIds = [];
+  // const courseData = await CourseModel.find({
+  //   _id: {$in: purchases.map(x => x.courseId)}
+  // });
 
-  purchases.forEach((purchase) => {
-    purchasedCourseIds.push(purchase.courseId);
+  res.json({
+    purchases,
+    
   });
 };
 
