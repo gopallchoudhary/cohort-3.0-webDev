@@ -3,8 +3,6 @@ import "./App.css";
 import { BulbContext } from "./context/BulbContext";
 
 function App() {
-
-  
   return (
     <>
       <LightBulb />
@@ -12,37 +10,31 @@ function App() {
   );
 
   function LightBulb() {
-    
     return (
       <>
-      <BulbState />
-      <ToggleBulb />
-
+        <BulbState />
+        <ToggleBulb />
       </>
-    )
+    );
   }
 
   function BulbState() {
-    const {bulbOn} = useContext(BulbContext)
-    return (
-      <>
-      {bulbOn ? "ON" : "OFF"}
-      </>
-    )
+    const { bulbOn } = useContext(BulbContext);
+    return <>{bulbOn ? "ON" : "OFF"}</>;
   }
-
+  
   function ToggleBulb() {
-    const {setBulbOn} = useContext(BulbContext)
+    const { setBulbOn } = useContext(BulbContext);
 
     const toggle = () => {
-      setBulbOn(prev => !prev)
-    }
-    
+      setBulbOn((prev) => !prev);
+    };
+
     return (
       <>
-      <button onClick={toggle}>Toggle bulb</button>
+        <button onClick={toggle}>Toggle bulb</button>
       </>
-    )
+    );
   }
 }
 
