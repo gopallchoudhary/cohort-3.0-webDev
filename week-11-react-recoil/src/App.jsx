@@ -14,20 +14,26 @@ function App() {
 
   function Increase() {
     const { count, setCount } = useContext(CountContext);
+    const increase = () => {
+      setCount(prev => prev + 1)
+    }
 
     return (
       <>
-        <button onClick={() => setCount(count + 1)}>Increase</button>
+        <button onClick={increase}>Increase</button>
       </>
     );
   }
 
   function Decrease() {
     const { count, setCount } = useContext(CountContext);
+    const decrease = () => {
+      setCount(prev => prev - 1)
+    }
 
     return (
       <>
-        <button onClick={() => setCount(count - 1)}>Decrease</button>
+        <button onClick={decrease}>Decrease</button>
       </>
     );
   }
