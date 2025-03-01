@@ -1,10 +1,12 @@
 import express from "express"
 const app = express()
 import cookieParser from "cookie-parser"
+import cors from 'cors'
 
 //! common middlewares
 app.use(express.json())
 app.use(cookieParser())
+app.use(cors())
 
 //! import routes
 import adminRouter from "./routes/admin.routes.js"

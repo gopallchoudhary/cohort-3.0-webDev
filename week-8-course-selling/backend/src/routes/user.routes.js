@@ -3,6 +3,7 @@ const router = Router();
 
 //# import controllers
 import {
+  getUsers,
   logOut,
   purchases,
   signIn,
@@ -14,5 +15,6 @@ router.route("/signup").post(signUp);
 router.route("/signin").post(signIn);
 router.route("/logout").get(userAuthMiddleware, logOut);
 router.route("/purchases").get(userAuthMiddleware, purchases); // already purchased
+router.route("/getusers").get(getUsers)
 
 export default router;

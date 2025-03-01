@@ -149,7 +149,7 @@ const purchases = async (req, res) => {
   const userId = req.user._id;
   const purchases = await PurchaseModel.find({
     userId,
-  }).populate("courseId")
+  }).populate("courseId");
 
   if (purchases.length == 0) {
     throw new ApiError(400, "You havent bought any course yet");
@@ -161,8 +161,18 @@ const purchases = async (req, res) => {
 
   res.json({
     purchases,
-    
   });
 };
 
-export { signUp, signIn, purchases, logOut };
+const getUsers = async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    console.log(users);
+    
+    return res.json(users);
+  } catch (error) {
+    res.status(500).json({message: error.message})
+  }
+};
+
+export { signUp, signIn, purchases, logOut, getUsers };
