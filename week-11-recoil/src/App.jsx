@@ -1,66 +1,76 @@
-import './App.css'
-import { useEffect, useState, memo } from 'react'
+import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import "./App.css";
+
+import { counterAtom, evenSelector } from "./store/atom/counter";
+import { notifications, totalNotificationSelector } from "./store/atom/notification";
 
 function App() {
+  return (
+    <RecoilRoot>
+      <MainApp />
+      {/* <Buttons />
+      <Counter />
+      <IsEven /> */}
+    </RecoilRoot>
+  );
+}
+
+function MainApp() {
+  const [notificationCount, setNotificationCount] = useRecoilState(notifications)
+  const allNotification = useRecoilValue(totalNotificationSelector)
+
+
 
   return (
     <>
-      <Counter />
+      <button>Home</button>
+      <br />
+      <br />
+
+      <button>My Network ({notificationCount.networks >= 100 ? "99+" : notificationCount.networks})</button>
+      <button>Job ({notificationCount.jobs})</button>
+      <button>Messaging ({notificationCount.messages})</button>
+      <button>Notifications ({notificationCount.notifications})</button>
+      <br />
+      <br />
+
+      <button>Me ({allNotification})</button >
+
     </>
-  )
+  );
 }
 
 
+
+function Buttons() {
+  const setCount = useSetRecoilState(counterAtom);
+
+  function increase() {
+    setCount((prev) => prev + 2);
+  }
+
+  function decrease() {
+    setCount(prev => prev - 1);
+  }
+
+  return (
+    <div>
+      <button onClick={increase}>Increase</button>
+      <button onClick={decrease}>Decrease</button>
+    </div>
+  );
+}
 
 function Counter() {
-  const [count, setCount] = useState(0)
+  const count = useRecoilValue(counterAtom);
 
-  useEffect(() => {
-    setInterval(() => {
-      setCount(prev => prev + 1)
-    }, 2000);
-  }, [])
-
-  return (
-    <div>
-      <Value />
-      <Decrease />
-      <Increase />
-    </div>
-  )
+  return <div>{count}</div>;
 }
 
+function IsEven() {
+  const even = useRecoilValue(evenSelector);
 
-function Value() {
-
-  return (
-    <div>
-      1
-    </div>
-  )
+  return <div>{even ? "EVEN" : "ODD"}</div>;
 }
 
-function Increase() {
-
-  const increase = () => {
-
-  }
-
-  return (
-    <div>
-      <button onClick={increase}>Incrase</button>
-    </div>
-  )
-}
-
-function Decrease() {
-  const decrease = () => {
-
-  }
-
-  return (
-    <button onClick={decrease}>Decrease</button>
-  )
-}
-
-export default App
+export default App;
