@@ -1,19 +1,60 @@
-import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { RecoilRoot, useRecoilState, useRecoilStateLoadable, useRecoilValue, useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import "./App.css";
 
 import { counterAtom, evenSelector } from "./store/atom/counter";
 import { notifications, totalNotificationSelector } from "./store/atom/notification";
+import { todosAtomFamily } from "./store/atom/todoAtom";
+import { Suspense, useEffect } from "react";
 
 function App() {
   return (
     <RecoilRoot>
-      <MainApp />
-      {/* <Buttons />
+      <Todo id={1} />
+      <Todo id={2} />
+      <Todo id={3} />
+      <Todo id={4} />
+
+
+
+
+
+      {/* <MainApp />
+      <Buttons />
       <Counter />
       <IsEven /> */}
-    </RecoilRoot>
+    </RecoilRoot >
   );
 }
+
+
+
+function Todo({ id }) {
+  const todo = useRecoilValueLoadable(todosAtomFamily(id))
+  console.log(todo);
+
+  if (todo.state == "loading") {
+    return <div>
+      loading...
+    </div>
+  } else if (todo.state == "hasValue") {
+    return (
+      <div>
+        <p>{todo.contents.id} - {todo.contents.todo}</p>
+      </div>
+    )
+
+  }
+
+  // return (
+  //   <div>
+  //     <p>{todo.id} - {todo.todo}</p>
+  //   </div>
+  // )
+
+
+
+}
+
 
 function MainApp() {
   const [notificationCount, setNotificationCount] = useRecoilState(notifications)
@@ -39,7 +80,6 @@ function MainApp() {
     </>
   );
 }
-
 
 
 function Buttons() {

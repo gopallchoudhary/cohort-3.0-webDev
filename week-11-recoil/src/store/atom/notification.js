@@ -3,12 +3,12 @@ import { notificationsObject } from "../../assets/notifications.js";
 
 export const notifications = atom({
   key: "notificationAtom",
-  default: {
-    networks: notificationsObject.networks,
-    jobs: notificationsObject.jobs,
-    messages: notificationsObject.messages,
-    notifications: notificationsObject.notifications,
-  },
+  default: selector({
+    key: "notificationSelector",
+    get: () => {
+      return notificationsObject;
+    },
+  }),
 });
 
 // export const jobAtom = atom({
