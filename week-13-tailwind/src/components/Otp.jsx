@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
 const Otp = ({ }) => {
 
@@ -12,20 +12,31 @@ const Otp = ({ }) => {
     return (
         <div className='flex gap-2 mx-auto'>
             <SubOtp reference={ref1} onDone={() => ref2.current.focus()} />
-            <SubOtp reference={ref2} onDone={() => ref3.current.focus()} />
+            <SubOtp reference={ref2} onDone={() => ref3.current.focus()} onBack={() => ref1.current.focus()}/>
             <SubOtp reference={ref3} onDone={() => ref4.current.focus()} />
             <SubOtp reference={ref4} onDone={() => ref5.current.focus()} />
             <SubOtp reference={ref5} onDone={() => ref6.current.focus()} />
-            <SubOtp reference={ref6}  />
+            <SubOtp reference={ref6} />
         </div>
     )
 }
 
 function SubOtp({ reference, onDone }) {
-
+    const [inputBoxValue, setInputBoxValue] = useState("")
     return (
         <div>
-            <input type="text" ref={reference} onChange={() => onDone()} className='w-[40px] h-[50px] rounded-md outline-none bg-gray-600 px-4' />
+            <input value={inputBoxValue} type="text" ref={reference} onChange={(e) => {
+                const val = e.target.value
+                const num = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+                if (val == "") {
+                    // go back logic
+                } else if (num.includes(val)) {
+                    onDone()
+                    setInputBoxValue(val)
+                } else {
+
+                }
+            }} className='w-[40px] h-[50px] rounded-md outline-none bg-gray-600 px-4' />
         </div>
     )
 }

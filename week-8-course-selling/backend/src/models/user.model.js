@@ -31,7 +31,7 @@ const userSchema = new Schema({
   refreshToken: {
     type: String,
   },
-});
+}); 
 
 //!password-hashing
 userSchema.pre("save", async function (next) {

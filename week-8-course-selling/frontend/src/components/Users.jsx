@@ -12,7 +12,6 @@ const Users = () => {
         }
         fetchUsers()
     }, [])
-    console.log(users);
 
 
 
