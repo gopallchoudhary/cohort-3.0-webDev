@@ -13,10 +13,10 @@ const Otp = ({ }) => {
         <div className='flex gap-2 mx-auto'>
             <SubOtp reference={ref1} onDone={() => ref2.current.focus()} />
             <SubOtp reference={ref2} onDone={() => ref3.current.focus()} onBack={() => ref1.current.focus()}/>
-            <SubOtp reference={ref3} onDone={() => ref4.current.focus()} />
-            <SubOtp reference={ref4} onDone={() => ref5.current.focus()} />
-            <SubOtp reference={ref5} onDone={() => ref6.current.focus()} />
-            <SubOtp reference={ref6} />
+            <SubOtp reference={ref3} onDone={() => ref4.current.focus()} onBack={() => ref2.current.focus()}/>
+            <SubOtp reference={ref4} onDone={() => ref5.current.focus()} onBack={() => ref3.current.focus()}/>
+            <SubOtp reference={ref5} onDone={() => ref6.current.focus()} onBack={() => ref4.current.focus()}/>
+            <SubOtp reference={ref6} onBack={() => ref5.current.focus()}/>
         </div>
     )
 }
