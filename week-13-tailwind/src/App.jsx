@@ -21,8 +21,7 @@ function App() {
           <div className='flex  flex-col gap-8 text-white w-4/5 mx-auto'>
             <Input type={"text"} placeholder={"Enter your birth year"} setDisabled={setDisabled} />
             <Button disabled={disabled} text={'Sign Up'} />
-            <Otp />
-            <Button text={'Verify'} disabled={disabled} />
+            <Otp number={5} />
           </div>
         </div>
 

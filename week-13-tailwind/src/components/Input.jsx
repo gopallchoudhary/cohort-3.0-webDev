@@ -4,7 +4,7 @@ const Input = ({ type, placeholder, setDisabled }) => {
     const [birthYear, setBirthYear] = useState("")
 
     useEffect(() => {
-        if (birthYear.length) {
+        if (birthYear.length > 3) {
             setDisabled(false)
         } else {
             setDisabled(true)
