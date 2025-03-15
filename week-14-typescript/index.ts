@@ -1,9 +1,9 @@
 function delayedCall(anotherFn: () => void) {
-    setTimeout(anotherFn, 1000)
+  setTimeout(anotherFn, 1000);
 }
 
 function log() {
-    console.log("Hey There");
+  console.log("Hey There");
 }
 
-delayedCall(log)
+delayedCall(log);
