@@ -45,3 +45,20 @@ let user3: Resutl = {
     accountType: "savings",
     cvv: 232
 }
+
+type A = {
+    name: string
+}
+
+type B = {
+    age: number
+}
+
+interface X extends A, B {
+
+}
+
+let x: X = {
+    name: "Gopal", 
+    age: 23
+}

@@ -25,3 +25,7 @@
 25. we can implement interfaces as classes but we cannot implement types as classes -> wrong
 26. in abstract class we can give default implementations or defintion of the function i.e. we can give the definition of the function not just initialize it
 27. Unions and intersections are only possible in types and not in interface
+28. Pick => lets you pick selected things from the type or interface
+29. Partial => makes all the fields are optional (like name?:, age?:)
+30. readonly and Readonly<User>
+31. Record<string, User> (key & value)
