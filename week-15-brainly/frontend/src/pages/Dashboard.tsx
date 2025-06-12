@@ -6,12 +6,18 @@ import Card from "../components/Card"
 import CreateContentModal from "../components/CreateContentModal"
 import { ContentContext } from "../context/ContentContext"
 import SideBar from "../components/SideBar"
+import { useContent } from "../hooks/useContent"
+
 
 const Dashboard = () => {
     const { setOpen } = useContext(ContentContext)
     const toggle = () => {
         setOpen((prev) => !prev)
     }
+
+
+
+    const contents = useContent()
     return (
         <div>
             <CreateContentModal />
@@ -19,7 +25,7 @@ const Dashboard = () => {
                 <div className="min-w-60">
                     <SideBar />
                 </div>
-                <div className="py-6 px-8 bg-slate-100 h-screen w-full border-l-1">
+                <div className="py-6 px-8 bg-slate-100 h-full w-full border-l-1">
                     <div className="flex gap-4 py-2 justify-end mr-4">
                         <Button
                             text="Add Content"
@@ -38,10 +44,14 @@ const Dashboard = () => {
 
 
                     </div>
-                    <div className="flex gap-2">
-                        <Card title="tweet" type="twitter" link="https://x.com/naval/status/1910245415322337330" />
+                    <div className=" columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4">
 
-                        <Card title="YouTube" link="https://www.youtube.com/watch?v=jzE_NaTOU7g" type="youtube" />
+                        {
+                            contents.map(({ title, link, type }) => <Card title={title} type={type} link={link} />
+                            )
+                        }
+
+
                     </div>
                 </div>
             </div>

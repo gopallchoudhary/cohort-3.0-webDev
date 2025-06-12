@@ -17,6 +17,7 @@ function App() {
 
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:8080");
+    //@ts-ignore
     setSocket(ws);
 
     ws.onmessage = (e) => {

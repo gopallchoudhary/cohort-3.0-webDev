@@ -3,18 +3,36 @@ import { ContentContext } from "../context/ContentContext";
 import CrossIcon from "../assets/icons/CrossIcon";
 import Input from "./Input";
 import Button from "./Button";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 const CreateContentModal = () => {
+    enum contentType {
+        Youtube = "Youtube",
+        Twitter = "Twitter"
+    }
     const { open, setOpen } = useContext(ContentContext);
     const [title, setTitle] = useState("");
     const [link, setLink] = useState("");
-    const [type, setType] = useState("");
+    const [type, setType] = useState<contentType>(contentType.Youtube);
+
+    async function addContent() {
+        const response = await axios.post(
+            `${BACKEND_URL}/api/v1/content/post`,
+            { title, link, type },
+            { withCredentials: true }
+        );
+        console.log(response.data);
+        setTitle("");
+        setLink("");
+        setOpen((prev) => !prev)
+    }
     return (
         <div>
             {open && (
-                <div className="w-screen h-screen bg-black opacity-85 fixed top-0 left-0 flex justify-center">
-                    <div className=" flex flex-col justify-center opacity-100">
-                        <div className="bg-white rounded  flex flex-col opacity-100">
+                <div className="w-screen h-screen bg-black opacity-90 fixed top-0 left-0 flex justify-center">
+                    <div className=" flex flex-col justify-center  opacity-100">
+                        <div className="bg-white rounded  flex flex-col">
                             <div className="flex justify-end p-3">
                                 <button onClick={() => setOpen((prev) => !prev)}>
                                     <CrossIcon size="md" />
@@ -42,20 +60,35 @@ const CreateContentModal = () => {
                                             placeholder="link"
                                         />
                                     </div>
-                                    <div className="flex flex-col gap-1 text-base font-medium">
-                                        <p>Input Type</p>
-                                        <Input
-                                            value={type}
-                                            onChange={(e) => setType(e.target.value)}
-                                            type="text"
-                                            placeholder="type"
+                                    <p className="font-medium text-base ">Input Type</p>
+                                    <div className="flex  gap-4 text-base font-medium">
+                                        <Button
+                                            text="Youtube"
+                                            size="sm"
+                                            variant={
+                                                type === contentType.Youtube ? "primary" : "secondary"
+                                            }
+                                            onClick={() => setType(contentType.Youtube)}
+                                        />
+                                        <Button
+                                            text="Twitter"
+                                            size="sm"
+                                            variant={
+                                                type === contentType.Twitter ? "primary" : "secondary"
+                                            }
+                                            onClick={() => setType(contentType.Twitter)}
                                         />
                                     </div>
                                     {/* Inputs End */}
                                 </div>
                             </span>
                             <div className="flex justify-center pb-4 opacity-100">
-                                <Button text="Submit" size="md" variant="primary" />
+                                <Button
+                                    onClick={addContent}
+                                    text="Submit"
+                                    size="md"
+                                    variant="primary"
+                                />
                             </div>
                         </div>
                     </div>

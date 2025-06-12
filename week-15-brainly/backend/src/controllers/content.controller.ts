@@ -7,22 +7,35 @@ export interface customRequest extends Request {
 }
 
 
-//? post
+//> post
 async function postsContent(req: customRequest, res: Response) {
-    const { title, link, type, tags, userId } = req.body
-    if ([title, link, type].some((field) => field?.toString().trim() == "")) {
-        res
-            .status(411)
-            .json({ success: false, message: "Incomplete information" })
-        return;
+    try {
+        //> get data
+        const { title, link, type, tags, } = req.body
+        if ([title, link, type].some((field) => field?.toString().trim() == "")) {
+            res
+                .status(411)
+                .json({ success: false, message: "Incomplete information" })
+            return;
+        }
+
+        //> user
+        const user = req.user
+
+        //> create content
+        const content = await ContentModel.create({ title, link, type, tags, userId: user?._id })
+        res.json({ success: true, message: "content addedd successfully", content: content })
+        return
+
+    } catch (error) {
+        console.error("error while posting your content: ", error);
+        res.status(500).json({ success: false, messsage: "Internal server error" });
+        return
     }
-    const user = req.user
-    const content = ContentModel.create({ title, link, type, tags, userId: user?._id })
-    res.json({ success: true, message: "content addedd successfully", content: content })
 }
 
 
-//? get
+//> get
 async function getContent(req: customRequest, res: Response) {
     const user = req.user
 
@@ -41,11 +54,11 @@ async function getContent(req: customRequest, res: Response) {
 }
 
 
-//? delete
+//> delete
 async function deleteContent(req: customRequest, res: Response) {
     const user = req?.user
-    const deletedContent = await ContentModel.deleteMany({userId: user?._id})
-    res.json({deletedContent: deletedContent})
+    const deletedContent = await ContentModel.deleteMany({ userId: user?._id })
+    res.json({ deletedContent: deletedContent })
 }
 
 export { getContent, postsContent, deleteContent }
