@@ -41,10 +41,12 @@ function App() {
   // const deboundFn = useDebounce(sendDataToBackend)
 
   const [inputVal, setInputVal] = useState("")
-  const debounce = useDebounce(inputVal, 300)
+  const debounce = useDebounce(inputVal, 1000)
 
   useEffect(() => {
     console.log("expensive operation");
+    console.log(debounce);
+    
     
   }, [debounce])
 
@@ -53,7 +55,12 @@ function App() {
 
   return (
     <>
-      <input type="text" onChange={(e) => setInputVal(e.target.value)} />
+      <input type="text" onChange={(e) => setInputVal(e.target.value)} /> <br />
+      {value} <br />
+      {prev} <br />
+      <button onClick={() => {
+        setValue((prev) => prev + 1)
+      }}>click me</button>
     </>
   )
 }

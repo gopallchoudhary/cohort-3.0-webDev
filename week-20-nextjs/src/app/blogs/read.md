@@ -1,0 +1,1 @@
+/blogs => render nothing if there is no page.tsx inside blogs folder

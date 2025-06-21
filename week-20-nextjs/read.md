@@ -1,0 +1,3 @@
+-> in ssr we cannot send the token stored in the local storage to server
+-> when browser sends the first request to the server it will never contain cookie (token) if token is stored in the local storage
+-> server does not have access to local storage

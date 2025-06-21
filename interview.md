@@ -1,0 +1,1 @@
+1. seo crawlers can never go to authenticated page
