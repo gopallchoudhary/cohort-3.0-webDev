@@ -38,8 +38,6 @@ export default function Home() {
           <li>Save and see your changes instantly.</li>
         </ol>
 
-
-
         <div className={styles.ctas}>
           <a
             className={styles.primary}
@@ -65,7 +63,7 @@ export default function Home() {
             Read our docs
           </a>
         </div>
-        <Button appName="WEB" className={styles.secondary}>
+        <Button appName="web" className={styles.secondary}>
           Open alert
         </Button>
       </main>

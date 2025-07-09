@@ -12,9 +12,10 @@ pgClient.connect();
 
 app.post("/signup", async (req, res) => {
     try {
-        const { username, email, password, city, country, street, pincode } =
-            req.body;
-        const insertQuery = `INSERT INTO users(username, email, password) VALUES($1, $2, $3) RETURNING *;`; //?to avoid SQL injection
+        const { username, email, password, city, country, street, pincode } = req.body;
+        
+        const insertQuery = `INSERT INTO users(username, email, password) VALUES($1, $2, $3) RETURNING *;`; //> to avoid SQL injection
+        
         const addressesInsertQuery = `INSERT INTO addresses(user_id, city, country, street, pincode) VALUES($1, $2, $3, $4, $5) RETURNING *;`;
 
         //! transaction
