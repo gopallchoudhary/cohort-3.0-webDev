@@ -13,7 +13,7 @@ export interface IUserMethods {
 }
 
 
-const UserSchema: Schema<IUser, {}, IUserMethods> = new Schema<IUser, {}, IUserMethods>({
+const UserSchema: Schema<IUser, {}, IUserMethods> = new Schema({
     username: {
         type: String,
         required: true,

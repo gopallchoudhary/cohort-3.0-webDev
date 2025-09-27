@@ -11,24 +11,24 @@ async function signUp(req: Request, res: Response): Promise<void> {
             res
                 .status(411)
                 .json({ success: false, message: "username and password are required" });
-            return 
+            return
         }
 
-        
-        
+
+
 
         //> existed user
         const existedUser = await User.findOne({ username });
         if (existedUser) {
-            
+
             res
                 .status(409)
                 .json({ success: false, message: "username already existed" });
-                
+
             return
         }
 
-        
+
 
         //>  creating a user
         const newUser = await User.create({ username, password });
@@ -36,7 +36,7 @@ async function signUp(req: Request, res: Response): Promise<void> {
         res
             .status(200)
             .json({ success: true, message: "User successfully signed up", user: newUser, });
-            return
+        return
 
     } catch (error) {
         console.error("error while creating a user: ", error);
