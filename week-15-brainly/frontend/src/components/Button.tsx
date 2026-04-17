@@ -30,7 +30,7 @@ const sizeStyles = {
 };
 
 
-const Button = (props: ButtonProps) => {
+const Button:React.FC<ButtonProps> = (props) => {
     return (
         <button
             onClick={props.onClick}

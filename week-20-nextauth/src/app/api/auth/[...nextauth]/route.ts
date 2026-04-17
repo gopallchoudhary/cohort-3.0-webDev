@@ -37,12 +37,45 @@ const handler = NextAuth({
             }
         }),
 
+
+
         GoogleProvider({
             clientId: "hardcoded",
             clientSecret: "xyz"
         })
+
     ],
     secret: process.env.NEXTAUTH_SECRET,
+})
+
+const handler2 = NextAuth({
+    providers: [
+        CredentialsProvider({
+            name: "Email",
+
+            credentials: {
+                username: { label: "username", type: "text" },
+                password: { label: "password", type: "passwrod" }
+            },
+            async authorize(credentials, req) {
+                const username = credentials?.username
+                const passwrod = credentials?.password
+
+                const user = {
+                    username: "gopal23",
+                    id: 1,
+                    name: "Gopal"
+
+                }
+                if (user) {
+                    return user
+                } else {
+                    return null
+                }
+            },
+        })
+    ],
+    secret: process.env.NEXTAUTH_SECRET
 })
 
 // export { handler as GET, handler as POST }

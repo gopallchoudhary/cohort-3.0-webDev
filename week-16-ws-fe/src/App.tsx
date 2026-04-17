@@ -3,7 +3,8 @@ import "./App.css";
 
 function App() {
   const [socket, setSocket] = useState();
-  const inputRef = useRef();
+  //@ts-ignore
+  const inputRef = useRef()
   const [rec, setRec] = useState("");
 
   function sendMessage() {
@@ -16,20 +17,22 @@ function App() {
   }
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
+    const ws = new WebSocket("ws://localhost:8080")
+
     //@ts-ignore
-    setSocket(ws);
+
+    setSocket(ws)
 
     ws.onmessage = (e) => {
-      alert(e.data);
-      setRec(e.data);
-    };
-  }, []);
+      alert(e.data)
+      setRec(e.data)
+    }
+  }, [])
 
   return (
     <>
       <input ref={inputRef} type="text" placeholder="message..." />
-      <button onClick={sendMessage}>Send</button>
+      <button onClick={sendMessage}>Send</button>=
       <p>{rec}</p>
     </>
   );

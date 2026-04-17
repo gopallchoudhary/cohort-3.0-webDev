@@ -25,6 +25,7 @@ app.post("/signup", async function (req, res) {
             .regex(/[a-z]/)
             .regex(/[1-9]/)
             .regex(/[!@#$%&*]/),
+        mobile: z.number().max(10)
     });
 
     //const parseData = requiredBody.parse(req.body)

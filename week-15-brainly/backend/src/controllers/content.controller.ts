@@ -57,6 +57,8 @@ async function getContent(req: customRequest, res: Response) {
 //> delete
 async function deleteContent(req: customRequest, res: Response) {
     const user = req?.user
+    console.log(req.user);
+    
     const deletedContent = await ContentModel.deleteMany({ userId: user?._id })
     res.json({ deletedContent: deletedContent })
 }

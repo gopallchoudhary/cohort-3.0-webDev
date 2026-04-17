@@ -9,19 +9,19 @@ import { Suspense, useEffect } from "react";
 function App() {
   return (
     <RecoilRoot>
-      <Todo id={1} />
+      {/* <Todo id={1} />
       <Todo id={2} />
       <Todo id={3} />
-      <Todo id={4} />
+      <Todo id={4} /> */}
 
 
 
 
 
-      {/* <MainApp />
+      {/* <MainApp /> */}
       <Buttons />
       <Counter />
-      <IsEven /> */}
+      <IsEven />
     </RecoilRoot >
   );
 }

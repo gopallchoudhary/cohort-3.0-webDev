@@ -13,7 +13,7 @@ export interface IUserMethods {
 }
 
 
-const UserSchema: Schema<IUser, {}, IUserMethods> = new Schema({
+const UserSchema: Schema<IUser, Model<IUser, {}, IUserMethods>, IUserMethods> = new Schema({
     username: {
         type: String,
         required: true,
@@ -51,7 +51,6 @@ UserSchema.methods.generateToken = function (): string {
     )
 }
 
-
-
-
 export const User = mongoose.model<IUser, Model<IUser, {}, IUserMethods>>("User", UserSchema)
+
+

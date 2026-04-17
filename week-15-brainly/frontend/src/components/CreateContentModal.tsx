@@ -22,7 +22,6 @@ const CreateContentModal = () => {
             { title, link, type },
             { withCredentials: true }
         );
-        console.log(response.data);
         setTitle("");
         setLink("");
         setOpen((prev) => !prev)
@@ -84,7 +83,7 @@ const CreateContentModal = () => {
                             </span>
                             <div className="flex justify-center pb-4 opacity-100">
                                 <Button
-                                    onClick={addContent}
+                                    onClick={() => addContent()}
                                     text="Submit"
                                     size="md"
                                     variant="primary"

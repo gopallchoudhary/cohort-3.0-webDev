@@ -1,5 +1,5 @@
 import express from "express";
-import { shareBrain, shareLink } from "../controllers/brain.controllers.js";
+import { shareBrain, shareLink } from "../controllers/brain.controller.js";
 import { userAuth } from "../middlewares/user.middleware.js";
 
 

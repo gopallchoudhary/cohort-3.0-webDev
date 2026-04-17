@@ -1,6 +1,7 @@
 import { User } from "../models/user.model.js";
 import { Request, Response } from "express";
 
+
 //. Sign Up
 
 async function signUp(req: Request, res: Response): Promise<void> {
@@ -18,7 +19,7 @@ async function signUp(req: Request, res: Response): Promise<void> {
 
 
         //> existed user
-        const existedUser = await User.findOne({ username });
+        const existedUser = await (User as any).findOne({ username });
         if (existedUser) {
 
             res
